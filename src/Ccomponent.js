@@ -5,35 +5,35 @@ export default class Ccomponent extends Component {
     super(props);
 
     this.state = {
-      count: 0,
+      input: "",
+      submit: "",
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.reset = this.reset.bind(this);
+  handleChange(event) {
+    this.setState({
+      input: event.target.value,
+    });
   }
-  increment() {
-    this.setState((state) => ({
-      count: ++state.count,
-    }));
-  }
-  decrement() {
-    this.setState((state) => ({
-      count: --state.count,
-    }));
-  }
-  reset() {
-    this.setState({ count: 0 });
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      submit: this.state.input,
+    });
   }
 
   render() {
     return (
-      <div>
-        <h1>Current value: {this.state.count}</h1>
-        <button onClick={this.increment}>increment</button>
-        <button onClick={this.decrement}>decrement</button>
-        <button onClick={this.reset}>reset</button>
-      </div>
+      <>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} />
+          <button type="submit">submit</button>
+        </form>
+        <h3>{this.state.submit}</h3>
+      </>
     );
   }
 }
