@@ -7,6 +7,7 @@ export default class Ccomponent extends Component {
     this.state = {
       input: "",
       submit: "",
+      items: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +23,7 @@ export default class Ccomponent extends Component {
     event.preventDefault();
     this.setState({
       submit: this.state.input,
+      items: [...this.state.items, this.state.input],
     });
   }
 
@@ -32,7 +34,11 @@ export default class Ccomponent extends Component {
           <input onChange={this.handleChange} />
           <button type="submit">submit</button>
         </form>
-        <h3>{this.state.submit}</h3>
+        <ul>
+          {this.state.items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
       </>
     );
   }
