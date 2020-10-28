@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* <Fcomponent customField="Custom Fcomponent Field" /> */}
-        <Fcomponent />
-        <Menu />
+        {/* <Fcomponent />
+        <Menu /> */}
         <Ccomponent />
         <img src={logo} className="App-logo" alt="logo" />
         <p>

@@ -1,12 +1,11 @@
 import React from "react";
 
-
 export default function Fcomponent(props) {
   return (
     <div>
-      <h1>Functional Component {props.customField}</h1>
+      <h1>Functional Component {props.name}</h1>
     </div>
   );
 }
 
-Fcomponent.defaultProps = { customField: "Defalut field" };
+Fcomponent.defaultProps = { name: "Defalut field" };
