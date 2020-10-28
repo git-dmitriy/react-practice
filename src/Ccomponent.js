@@ -1,19 +1,30 @@
 import React, { Component } from "react";
 import Fcomponent from "./Fcomponent";
+import Fncomponent from "./Fncomponent";
 
 export default class Ccomponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Data transfer",
+      inputValue: "",
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value,
+    });
   }
 
   render() {
     return (
       <>
-        <h1>Hello this is {this.state.name}</h1>
-        <Fcomponent name={this.state.name} />
+        <Fcomponent
+          input={this.state.inputValue}
+          handleChange={this.handleChange}
+        />
+        <Fncomponent input={this.state.inputValue} />
       </>
     );
   }
