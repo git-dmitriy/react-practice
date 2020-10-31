@@ -3,15 +3,28 @@ import classes from "./Quiz.module.css";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 export default class Quiz extends Component {
   state = {
+    activeQuestion: 0,
     quiz: [
       {
-        questions: "Что самого большого простого числа проще?",
+        questions: "Умный вопрос",
+        id: 1,
         rightAnswerId: 4,
         answers: [
-          { text: "Решето Эратосфена", id: 1 },
-          { text: "Baillie–PSW", id: 2 },
-          { text: "Люка-Лемера", id: 3 },
-          { text: "Жизнь", id: 4 },
+          { text: "Умный ответ", id: 1 },
+          { text: "Умный ответ", id: 2 },
+          { text: "Умный ответ", id: 3 },
+          { text: "Правильный ответ", id: 4 },
+        ],
+      },
+      {
+        questions: "Умный вопрос",
+        id: 2,
+        rightAnswerId: 3,
+        answers: [
+          { text: "Умный ответ", id: 1 },
+          { text: "Умный ответ", id: 2 },
+          { text: "Правильный ответ", id: 3 },
+          { text: "Умный ответ", id: 4 },
         ],
       },
     ],
@@ -19,6 +32,9 @@ export default class Quiz extends Component {
 
   onAnswerClickHandle = (answerId) => {
     console.log("answer id: ", answerId);
+    this.setState({
+      activeQuestion: this.state.activeQuestion + 1,
+    });
   };
 
   render() {
@@ -28,9 +44,11 @@ export default class Quiz extends Component {
         <div className={classes.QuizWrapper}>
           <h1>Quiz</h1>
           <ActiveQuiz
-            question={this.state.quiz[0].questions}
-            answers={this.state.quiz[0].answers}
+            question={this.state.quiz[this.state.activeQuestion].questions}
+            answers={this.state.quiz[this.state.activeQuestion].answers}
             onAnswerClick={this.onAnswerClickHandle}
+            quizLength={this.state.quiz.length}
+            questionNumber={this.state.activeQuestion + 1}
           />
         </div>
       </div>
