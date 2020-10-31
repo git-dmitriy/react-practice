@@ -32,6 +32,13 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandle = (answerId) => {
+    if (this.state.answerState) {
+      const key = Object.keys(this.state.answerState)[0];
+      if (this.state.answerState[key] === "succes") {
+        return;
+      }
+    }
+
     console.log("answer id: ", answerId);
     const question = this.state.quiz[this.state.activeQuestion];
 
