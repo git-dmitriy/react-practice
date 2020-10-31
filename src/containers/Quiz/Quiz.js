@@ -4,6 +4,7 @@ import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 export default class Quiz extends Component {
   state = {
     activeQuestion: 0,
+    answerState: null,
     quiz: [
       {
         questions: "Умный вопрос",
@@ -32,10 +33,39 @@ export default class Quiz extends Component {
 
   onAnswerClickHandle = (answerId) => {
     console.log("answer id: ", answerId);
-    this.setState({
-      activeQuestion: this.state.activeQuestion + 1,
-    });
+    const question = this.state.quiz[this.state.activeQuestion];
+
+    if (question.rightAnswerId === answerId) {
+      this.setState({
+        answerState: {
+          [answerId]: "succes",
+        },
+      });
+
+      const timeout = window.setTimeout(() => {
+        if (this.isQuizFinished()) {
+          console.log("Finished");
+        } else {
+          this.setState({
+            activeQuestion: this.state.activeQuestion + 1,
+            answerState: null,
+          });
+        }
+
+        window.clearTimeout(timeout);
+      }, 1000);
+    } else {
+      this.setState({
+        answerState: {
+          [answerId]: "error",
+        },
+      });
+    }
   };
+
+  isQuizFinished() {
+    return this.state.activeQuestion + 1 === this.state.quiz.length;
+  }
 
   render() {
     console.log("quiz this:", this);
@@ -49,6 +79,7 @@ export default class Quiz extends Component {
             onAnswerClick={this.onAnswerClickHandle}
             quizLength={this.state.quiz.length}
             questionNumber={this.state.activeQuestion + 1}
+            answerState={this.state.answerState}
           />
         </div>
       </div>
