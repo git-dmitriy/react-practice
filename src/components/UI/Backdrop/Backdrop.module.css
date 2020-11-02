@@ -1,0 +1,21 @@
+.Backdrop {
+  z-index: 50;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: .2s;
+  animation: show .2s linear 0s forwards;
+  opacity: 0;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .4
+  }
+}
