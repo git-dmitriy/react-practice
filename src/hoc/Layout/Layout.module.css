@@ -1,11 +1,11 @@
 .Layout {
-  height: 100vh;
   display: flex;
-  flex-direction: column;
+  height: 100vh;
+  background-color: #F6F6F6;
 }
 
 .Layout main {
   display: flex;
-  flex-direction: column;
+  margin: auto;
   flex-grow: 1;
 }
