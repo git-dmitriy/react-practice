@@ -49,7 +49,6 @@ export default class QuizCreator extends Component {
 
     const quiz = this.state.quiz.concat();
     const index = quiz.length + 1;
-
     const {
       question,
       option1,
@@ -69,18 +68,23 @@ export default class QuizCreator extends Component {
         { text: option4.value, id: option4.id },
       ],
     };
+
     quiz.push(questionItem);
     this.setState({
+      quiz,
       rightAnswerId: 1,
       isFormValid: false,
       formControls: createFormControls(),
     });
   };
+
   createQuizHandler = (event) => {
     event.preventDefault();
     console.log(this.state.quiz);
+
     // todo Servers
   };
+
   changeHandler = (value, controlName) => {
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[controlName] };
