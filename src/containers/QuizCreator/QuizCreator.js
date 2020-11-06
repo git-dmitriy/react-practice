@@ -4,6 +4,7 @@ import Button from "../../components/UI/Button/Button";
 import { createControl, validate, validateForm } from "../../Utilities/form";
 import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";
+import axios from "axios";
 
 function createOptionControl(num) {
   return createControl(
@@ -78,11 +79,23 @@ export default class QuizCreator extends Component {
     });
   };
 
-  createQuizHandler = (event) => {
+  createQuizHandler = async (event) => {
     event.preventDefault();
-    console.log(this.state.quiz);
 
-    // todo Servers
+    try {
+      await axios.post(
+        "https://react-tests-30d50.firebaseio.com/quizes.json",
+        this.state.quiz
+      );
+      this.setState({
+        quiz: [],
+        rightAnswerId: 1,
+        isFormValid: false,
+        formControls: createFormControls(),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   changeHandler = (value, controlName) => {
@@ -127,7 +140,6 @@ export default class QuizCreator extends Component {
     this.setState({
       rightAnswerId: +event.target.value,
     });
-    console.log(event.target.value);
   };
 
   render() {
@@ -167,7 +179,7 @@ export default class QuizCreator extends Component {
             </Button>
             <Button
               type="success"
-              onclick={this.createQuizHandler}
+              onClick={this.createQuizHandler}
               disabled={this.state.quiz.length === 0}
             >
               Создать тест
