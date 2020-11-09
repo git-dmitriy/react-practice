@@ -3,19 +3,10 @@ import classes from "./Quiz.module.css";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishQuiz/FinishedQuiz";
 import Loader from "../../components/UI/Loader/Loader";
-import axios from "../../axios/axios-quiz";
 import { connect } from "react-redux";
 import { fetchQuizById, quizAnswerClick } from "../../store/actions/quiz";
 
 class Quiz extends Component {
-  onAnswerClickHandle = (answerId) => {
-    this.props.quizAnswerClick(answerId);
-  };
-
-  isQuizFinished() {
-    return this.state.activeQuestion + 1 === this.state.quiz.length;
-  }
-
   retryHandle = () => {
     this.setState({
       activeQuestion: 0,
@@ -33,7 +24,7 @@ class Quiz extends Component {
     return (
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
-          <h1>Quiz</h1>
+          <h1>Тесты</h1>
           {this.props.loading || !this.props.quiz ? (
             <Loader />
           ) : this.props.isFinished ? (
@@ -46,7 +37,7 @@ class Quiz extends Component {
             <ActiveQuiz
               question={this.props.quiz[this.props.activeQuestion].question}
               answers={this.props.quiz[this.props.activeQuestion].answers}
-              onAnswerClick={this.onAnswerClickHandle}
+              onAnswerClick={this.props.quizAnswerClick}
               quizLength={this.props.quiz.length}
               questionNumber={this.props.activeQuestion + 1}
               answerState={this.props.answerState}
