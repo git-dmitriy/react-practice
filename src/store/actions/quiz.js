@@ -7,6 +7,7 @@ import {
   QUIZ_SET_STATE,
   FINISH_QUIZ,
   QUIZ_NEXT_QUESTION,
+  QUIZ_RETRY,
 } from "./actionTypes";
 
 export function fetchQuizes() {
@@ -95,6 +96,12 @@ export function quizNextQuestion(number) {
 
 export function isQuizFinished(state) {
   return state.activeQuestion + 1 === state.quiz.length;
+}
+
+export function retryQuiz() {
+  return {
+    type: QUIZ_RETRY,
+  };
 }
 
 export function quizAnswerClick(answerId) {
